@@ -150,11 +150,8 @@ export async function build({ targetDir, format, packageName }: BuildOptions) {
     buildRollup("jsx-runtime", {
       inject: { "./jsx-dom": packageName, delimiters: ["", ""] },
     }),
-    buildRollup("jsx-runtime", {
-      outputDir: OUT_DIR_MIN,
-      inject: { "./jsx-dom": `${packageName}/min`, delimiters: ["", ""] },
-    }),
     reexport("jsx-dev-runtime.js", OUT_DIR_MIN, "./jsx-runtime.js"),
+    reexport("jsx-runtime.js", OUT_DIR_MIN, "./index.js", jsxRuntimeExports),
     reexport("index.d.ts", OUT_DIR_MIN, "../index"),
     reexport("jsx-runtime.d.ts", OUT_DIR_MIN, "./index", jsxRuntimeExports),
     reexport("jsx-runtime.d.ts", OUT_DIR, "./index", jsxRuntimeExports),
